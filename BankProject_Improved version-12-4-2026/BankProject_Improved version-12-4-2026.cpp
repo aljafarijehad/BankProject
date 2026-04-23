@@ -21,9 +21,6 @@ int main() {
 
 	clsMainScreen:: ShowMainMenuScreen();
 
-
-
-
 	// Client1.Print();
 
 	return 0;
