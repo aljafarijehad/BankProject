@@ -125,6 +125,16 @@
   <ItemGroup>
     <ClCompile Include="BankProject_Improved version-12-4-2026.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\StringLibraryProject\StringLibraryProject\clsString.h" />
+    <ClInclude Include="clsBankClient.h" />
+    <ClInclude Include="clsDate.h" />
+    <ClInclude Include="clsInputValidate.h" />
+    <ClInclude Include="clsMainScreen.h" />
+    <ClInclude Include="clsPerson.h" />
+    <ClInclude Include="clsScreen.h" />
+    <ClInclude Include="clsUtil.h" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
