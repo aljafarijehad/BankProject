@@ -50,5 +50,8 @@
     <ClInclude Include="clsPerson.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="clsClientListScreen.h">
+      <Filter>Header Files\Screens</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
