@@ -2,9 +2,9 @@
 #include <iostream>
 #include "clsScreen.h"
 #include "clsInputValidate.h"
+#include "clsClientListScreen.h"
 class clsMainScreen : protected clsScreen
 {
-
 	private:
 
 		enum enMainMenuOptions {
@@ -13,9 +13,10 @@ class clsMainScreen : protected clsScreen
 			eUpdateClient = 5, eTransactionMenu = 6, eManageUser = 7, eLogOut = 8
 		};
 
-		static void _ShowListClientsScreen()
+		static void _ShowListClientsScreen ()
 		{
-			cout << "Client List Screen  , will be here " << endl;
+			// cout << "Client List Screen  , will be here " << endl;
+			clsClientListScreen::ShowClientList();
 			system("pause>0");
 		}
 
@@ -144,6 +145,5 @@ class clsMainScreen : protected clsScreen
 
 			_PerfromMainMenuOption(enMainMenuOptions(_ReadMenuOption()));
 		}
-
 
 };
