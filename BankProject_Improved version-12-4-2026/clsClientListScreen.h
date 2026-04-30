@@ -16,7 +16,7 @@ class clsClientListScreen : protected clsScreen
 			cout << "| " << setw(12) << left << Client.AccountBalance;
 			cout << endl;
 		}
-
+	
 	public:
 
 		static void ShowClientList()

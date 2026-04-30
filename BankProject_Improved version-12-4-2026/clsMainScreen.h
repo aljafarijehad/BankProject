@@ -1,8 +1,15 @@
 #pragma once
 #include <iostream>
-#include "clsScreen.h"
+//#include "clsScreen.h"
 #include "clsInputValidate.h"
 #include "clsClientListScreen.h"
+#include "clsAddNewClientScreen.h"
+#include "clsDeleteClientScreen.h"
+#include "clsUpdateClientScreen.h"
+#include "clsFindClientScreen.h"
+#include"clsBGBankSystem.h"
+#include "clsTransactionMenuScreen.h"
+using namespace std;
 class clsMainScreen : protected clsScreen
 {
 	private:
@@ -22,27 +29,32 @@ class clsMainScreen : protected clsScreen
 
 		static void _ShowAddNewClientScreen()
 		{
-			cout << "Add New Client Screen , will be here " << endl;
+			// cout << "Add New Client Screen , will be here " << endl;
+			clsAddNewClientScreen::ShowAddNewClientScreen();
 		}
 
 		static void _ShowDeleteClientScreen()
 		{
-			cout << "Delete Client Screen , will be here " << endl;
+			 // cout << "Delete Client Screen , will be here " << endl;
+			clsDeleteClientScreen::ShowdDeleteClientScreen();
 		}
 
 		static void _ShowFindClientScreen()
 		{
-			cout << "Find Client Screen , will be here " << endl;
+		 // 	cout << "Find Client Screen , will be here " << endl;
+			clsFindClientScreen::ShowFindClientScreen();
 		}
 
 		static void _UpdateNewClientScreen()
 		{
-			cout << "Update Client Screen , will be here " << endl;
+			//cout << "Update Client Screen , will be here " << endl;
+			clsUpdateClientScreen::ShowUpdateClientScreen();
 		}
 
 		static void _ShowTransactionMenuScreen()
 		{
-			cout << "Transaction Menu Screen , will be here" << endl;
+			//cout << "Transaction Menu Screen , will be here" << endl;
+			clsTransactionMenuScreen::ShowTransactionMainMenueScreen();
 		}
 
 		static void _ShowManageUserMenuScreen() 
@@ -126,7 +138,7 @@ class clsMainScreen : protected clsScreen
 
 		static void ShowMainMenuScreen()
 		{ 
-			system("cls");
+			 system("cls");
 			_DrawScreenHeader("\t\tMain Screen");
 
 			_FormatString("===========================================", clsScreen::enAlign::eCenter);
@@ -144,6 +156,7 @@ class clsMainScreen : protected clsScreen
 			_FormatString("===========================================", clsScreen::enAlign::eCenter);
 
 			_PerfromMainMenuOption(enMainMenuOptions(_ReadMenuOption()));
+
 		}
 
 };

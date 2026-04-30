@@ -18,13 +18,13 @@ private:
 
 	enum  enMode
 	{
-		EmptyMode = 0, UpdateMode = 1, AddNewMode = 2
+		EmptyMode = 0, UpdateMode = 1, AddNewMode = 2 ,DeleteMode = 3 
 	};
 	
 	enMode _Mode;
 	string _AccountNumber;
 	string _PinCode;
-	float _AccountBalance;
+	double _AccountBalance;
 	bool _MarkForDelete;
 
 	static clsBankClient _ConvertLineToClientObject(string Line)
@@ -131,6 +131,7 @@ private:
 				break;
 			}
 		}
+
 		if (Founded == false)
 		{
 			return false;
@@ -138,7 +139,6 @@ private:
 
 		_SaveClientDataToFile(_vClinets);
 		*this = _GetEmptyClientObject();
-
 
 		return true;
 	}
@@ -175,7 +175,7 @@ public:
 
 	void SetAccountBalance(float AccountBalance)
 	{
-		_AccountBalance = _AccountBalance;
+		_AccountBalance = AccountBalance;
 	}
 	float GetAccountBalance()
 	{
@@ -183,6 +183,7 @@ public:
 	}
 	__declspec(property (get = GetAccountBalance, put = SetAccountBalance)) float AccountBalance;
 
+	// NO UI Related Code inside object 
 	void Print()
 	{
 		cout << "\nClient Card : ";
@@ -281,8 +282,21 @@ public:
 					return enSaveResults::svSucceeded;
 				}
 			}
+			case enMode::DeleteMode:
+			{
+				if (!clsBankClient::IsClientExist(AccountNumber()))
+				{
+					return enSaveResults::svFaildEmptyObject;
+				}
+				else
+				{
+					this->_Delete();
+					//We need to set the mode to update after add new
+					return enSaveResults::svSucceeded;
+				}
+			}
 		}
-	}
+	} 
 	
 	static bool IsClientExist(string AccountNumber)
 	{
@@ -290,163 +304,37 @@ public:
 		return (!Client.IsEmpty());
 	}
 
-	static void ReadClientInfo(clsBankClient &Client) 
-	{
-		cout << "\nFirst Name :";
-		Client.FirstName = clsInputValidate::ReadString();
-
-		cout << " Last  Name :";
-		Client.SetLastName(clsInputValidate::ReadString());
-
-		cout << "Enter Email :";
-		Client.Email = clsInputValidate::ReadString();
-
-		cout << "Enter Phone :";
-		Client.Phone = clsInputValidate::ReadString();
-
-		cout << "Entre PinCode : ";
-		Client.PinCode = clsInputValidate::ReadString();
-
-		cout << "Enter Account Balance :";
-		Client.AccountBalance = stod(clsInputValidate::ReadString());
-
-	}
-
-	static void UpdateClient () 
-	{
-		string AccountNumber = "";
-		cout << "\n Please Enter Account Number : ";
-		AccountNumber = clsInputValidate::ReadString();
-
-		while (!clsBankClient::IsClientExist(AccountNumber))
-		{
-			cout << "Client with Account Numbre is not found , choose another one :";
-			AccountNumber = clsInputValidate::ReadString();
-		}
-
-		clsBankClient client = clsBankClient::Find(AccountNumber);
-		
-		client.Print();
-	
-		cout << "\n\nUpdate Client Info : " << endl;
-		cout << std::string(10, '-') << endl;
-		ReadClientInfo(client);
-
-		// need to refresh the file 
-		clsBankClient::enSaveResults SaveResult;
-		SaveResult = client.Save();
-		
-		switch (SaveResult)
-		{
-			case clsBankClient::enSaveResults::svSucceeded:
-			{
-					cout << "\nAccount Updated Successfully :-) \n";
-					client.Print();
-					break;
-			}
-			case clsBankClient::enSaveResults::svFaildEmptyObject:
-			{
-				cout << "\nError account was not saved because it's Empty ";
-				break;
-			}
-
-		} // end switch
-
-	} // end function 
+	// Move this proseger to clsAddNewClientScreen.h , cause NO UI Related Code inside object . 
 
 	static clsBankClient GetAddNewClientObject (string AccountNumber) 
 	{
 		return clsBankClient(enMode::AddNewMode, "", "", "","", AccountNumber,"", 0.00);
 	}
-
-	static clsBankClient AddNewClient () 
-	 {
-		string AccountNumber = "";
-		cout << "\nPlease Enter Account Number : ";
-		AccountNumber = clsInputValidate::ReadString();
-		
-		while (clsBankClient::IsClientExist(AccountNumber))
-		{
-			cout << "\nAccount Number Is Already Used , Choose another one :";
-			AccountNumber = clsInputValidate::ReadString();
-		}
-
-		clsBankClient NewClient = clsBankClient::GetAddNewClientObject(AccountNumber);
-
-		ReadClientInfo(NewClient);
-
-		enSaveResults SaveResult = NewClient.Save();
-
-		switch (SaveResult)
-		{
-			case clsBankClient::enSaveResults::svSucceeded:
-			{
-				cout << "\nAccount Added Successfully :-) \n\n";
-				NewClient.Print();
-				break;
-			}
-			case clsBankClient::enSaveResults::svFaildEmptyObject:
-			{
-				cout << "\nError account was not saved because it's Empty ";
-				break;
-			}
-			case clsBankClient::enSaveResults::svFaildAccountNumberNotExists:
-			{
-				cout << "Error account already in used !!" << endl;
-			}
-		}
-		return NewClient;
-		
-	} // end function
-
-	static void DeleteClient() 
+	
+	void GetDeleteClientObject() 
 	{
-		string AccountNumber = "";
-		cout << "\nPlease Enter Account Number :";
-		AccountNumber = clsInputValidate::ReadString();
-
-		while (!IsClientExist(AccountNumber))
-		{
-			cout << "Client with Account Number not founded , please enter another : ";
-			AccountNumber = clsInputValidate::ReadString();
-		}
-
-		clsBankClient ClientToDelete = clsBankClient::Find(AccountNumber);
-
-		// Print Client Record before deleted 
-		ClientToDelete.Print();
-
-		cout << "\nAre you sure that you want to delete this client ?y/n? ";
-		char Answer = 'n';
-		cin >> Answer;
-
-		if (tolower(Answer) == 'y')
-		{
-			if (ClientToDelete._Delete())
-			{
-				cout << "\nClient Deleted Successfully :-) \n";
-				cout << "Current Client Status : " << endl;
-				ClientToDelete.Print();
-			}
-			else
-			{
-				system("cls");
-				cout << "The Process not Completed , ERROR 404  !!" << endl << "\nThe Client not founded or something wrong :-(   .\n" << endl;;
-				system("pause>0");
-
-			}
-		}
-		else
-		{
-			system("cls");
-			cout << "\nThe Process not completed , an Error Occurred\n";
-			system("pause>0");
-		}
+		_Mode = enMode::DeleteMode;
 	}
+
+
+	// NO UI Related Code inside object 
+
 
 	static vector<clsBankClient> GetClientsList() {
 
 		return _LoadClientDateFromFile();
+	}
+
+	void Deposit(double Amount)
+	{
+		AccountBalance += Amount;
+		_Update();
+	}
+
+	void Withdraw(double Amount)
+	{
+		AccountBalance -= Amount;
+		_Update();
 	}
 
 	static void PrintClientRecord(clsBankClient client)

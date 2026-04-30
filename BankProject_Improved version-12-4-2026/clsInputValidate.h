@@ -101,16 +101,20 @@ public:
 		return number;
 	}
 
-	static double ReadDoubleNumber(string ErrorMessage = "Invalid Number , Enter again :")
+	enum enNumbreType
+	{
+		PositiveNumber, NigativeNumber, All 
+	};
+	static double ReadDoubleNumber(string ErrorMessage = "Invalid Number , Enter again :" , enNumbreType enType = All)
 	{
 		double number;
-		while (!(cin >> number))
+		while (!(cin >> number) || (enType == PositiveNumber && number < 0) || (enType == NigativeNumber && number > 0))
 		{
 			cin.clear();
 			cin.ignore(numeric_limits <streamsize>::max(), '\n');
 			cout << ErrorMessage;
 		}
-		return number;
+		return (number);
 	}
 
 	static double ReadDoubleNumberBetween(double From, double To, string ErrorMessage = "Number is not withn the range :")

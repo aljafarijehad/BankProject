@@ -19,7 +19,10 @@ int main() {
 	
 	//clsBankClient New = clsBankClient::AddNewClient();
 
+	//clsBGBankSystem::BGBankSystem();
+
 	clsMainScreen:: ShowMainMenuScreen();
+
 
 	// Client1.Print();
 

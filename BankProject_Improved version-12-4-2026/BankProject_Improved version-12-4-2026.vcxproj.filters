@@ -19,6 +19,9 @@
     <Filter Include="Header Files\Bulit-in Librarys">
       <UniqueIdentifier>{721b3da3-adba-4576-9bc8-c83b55fe7069}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\TransactionScreen">
+      <UniqueIdentifier>{8e475111-4b48-4ab0-8ce2-91a62aab8525}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BankProject_Improved version-12-4-2026.cpp">
@@ -52,6 +55,27 @@
     </ClInclude>
     <ClInclude Include="clsClientListScreen.h">
       <Filter>Header Files\Screens</Filter>
+    </ClInclude>
+    <ClInclude Include="clsAddNewClientScreen.h">
+      <Filter>Header Files\Screens</Filter>
+    </ClInclude>
+    <ClInclude Include="clsDeleteClientScreen.h">
+      <Filter>Header Files\Screens</Filter>
+    </ClInclude>
+    <ClInclude Include="clsUpdateClientScreen.h">
+      <Filter>Header Files\Screens</Filter>
+    </ClInclude>
+    <ClInclude Include="clsFindClientScreen.h">
+      <Filter>Header Files\Screens</Filter>
+    </ClInclude>
+    <ClInclude Include="clsBGBankSystem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="clsTransactionMenuScreen.h">
+      <Filter>Header Files\TransactionScreen</Filter>
+    </ClInclude>
+    <ClInclude Include="clsDepositScreen.h">
+      <Filter>Header Files\TransactionScreen</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
