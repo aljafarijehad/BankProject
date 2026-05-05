@@ -183,21 +183,6 @@ public:
 	}
 	__declspec(property (get = GetAccountBalance, put = SetAccountBalance)) float AccountBalance;
 
-	// NO UI Related Code inside object 
-	void Print()
-	{
-		cout << "\nClient Card : ";
-		cout << "\n_________________________________________";
-		cout << "\n\tFirst Name :" << FirstName;
-		cout << "\n\tLast Name  :" << LastName;
-		cout << "\n\tFull Name  :" << FullName();
-		cout << "\n\tEmail      :" << Email;
-		cout << "\n\tPhone      :" << Phone;
-		cout << "\n\tAcc. Number:" << AccountNumber();
-		cout << "\n\tPassword   :" << PinCode;
-		cout << "\n\tBalance    :" << to_string(AccountBalance);
-		cout << "\n_________________________________________";
-	}
 
 	static clsBankClient Find(string AccountNumber)
 	{
@@ -316,9 +301,7 @@ public:
 		_Mode = enMode::DeleteMode;
 	}
 
-
 	// NO UI Related Code inside object 
-
 
 	static vector<clsBankClient> GetClientsList() {
 
@@ -331,48 +314,14 @@ public:
 		_Update();
 	}
 
-	void Withdraw(double Amount)
+	bool Withdraw(double Amount)
 	{
+		if (Amount > AccountBalance)
+		{
+			return false;
+		}
 		AccountBalance -= Amount;
 		_Update();
-	}
-
-	static void PrintClientRecord(clsBankClient client)
-	{
-		cout << "| " << left << setw(15) << client.AccountNumber();
-		cout << "| " << left << setw(20) << client.FullName();
-		cout << "| " << left << setw(12) <<client.Phone;
-		cout << "| " << left << setw(20) << client.Email;
-		cout << "| " << left << setw(10) << client.PinCode;
-		cout << "| " << left << setw(12) << client.AccountBalance;
-		cout << "\n";
-	}
-
-	static void ShowClientList()
-	{
-		vector <clsBankClient> vClients = GetClientsList();
-		cout << "\n\t\t\t\t\tClient List (" << vClients.size() << ") Client(s) . " << endl;
-		cout << endl << std::string(100, '-') << endl;
-		cout << "| " << left << setw(15) << "Account Number ";
-		cout << "| " << left << setw(20) << "Client Name ";
-		cout << "| " << left << setw(12) << "Phone ";
-		cout << "| " << left << setw(20) << "Email ";
-		cout << "| " << left << setw(10) << "Pin Code ";
-		cout << "| " << left << setw(12) << "Balance ";
-		cout << "\n";
-		cout << endl << std::string(100, '-') << endl;
-
-
-		if (vClients.size() == 0) { cout << "\t\t\t\t\t NO CLIENT ARE A AVALIBLE IN THE LIST !\n"; }
-
-		
-		for (const clsBankClient& C : vClients)
-		{
-			PrintClientRecord(C);
-		}
-
-		cout << endl << std::string(100, '-') << endl;
-
 	}
 
 	static double GetTotalBalance()
@@ -386,37 +335,4 @@ public:
 		}
 		return TotalBalance;
 	}
-
-	static void PrintClientTotalBalance(clsBankClient client) 
-	{
-		cout << "| " << left << setw(35) << client.AccountNumber();
-		cout << "| " << left << setw(35) << client.FullName();
-		cout << "| " << left << setw(30) << client.AccountBalance;
-		cout << "\n";
-	}
-
-	static void  ShowTotalBalance() 
-	{
-		vector <clsBankClient> vClients = GetClientsList();
-		cout << "\n\t\t\t\t\tClient List (" << vClients.size() << ") Client(s) . " << endl;
-		cout << endl << std::string(100, '-') << endl;
-		cout << "| " << left << setw(35) << "Account Number ";
-		cout << "| " << left << setw(35) << "Client Name ";
-		cout << "| " << left << setw(30) << "Balance ";
-		cout << "\n";
-		cout << endl << std::string(100, '-') << endl;
-
-		if (vClients.size() == 0) { cout << "\t\t\t\t\t NO CLIENT ARE A AVALIBLE IN THE LIST !\n"; }
-
-		double TotalBalance = GetTotalBalance();
-
-
-		for (const clsBankClient& client : vClients)
-		{
-			PrintClientTotalBalance(client);
-		}
-		cout << "\n\t\tTotal Balance : " << TotalBalance << "(" << clsUtil::NumberToText(TotalBalance) << " ) " << endl;
-	}
-
-
 };

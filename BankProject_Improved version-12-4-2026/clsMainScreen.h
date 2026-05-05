@@ -9,6 +9,7 @@
 #include "clsFindClientScreen.h"
 #include"clsBGBankSystem.h"
 #include "clsTransactionMenuScreen.h"
+#include "clsManageUsersScreen.h"
 using namespace std;
 class clsMainScreen : protected clsScreen
 {
@@ -59,7 +60,8 @@ class clsMainScreen : protected clsScreen
 
 		static void _ShowManageUserMenuScreen() 
 		{
-			cout << "Manage User Menu Screen , will be here " << endl;
+			 // cout << "Manage User Menu Screen , will be here " << endl;
+			clsManageUsersScreen::ShowManageUsersMenue();
 		}
 
 		static int _ReadMenuOption()

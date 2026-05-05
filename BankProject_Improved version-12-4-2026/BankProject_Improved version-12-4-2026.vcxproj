@@ -124,10 +124,12 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="BankProject_Improved version-12-4-2026.cpp" />
+    <ClCompile Include="clsAddNewUserScreen.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\StringLibraryProject\StringLibraryProject\clsString.h" />
     <ClInclude Include="clsAddNewClientScreen.h" />
+    <ClInclude Include="clsAddNewUserScreen.h" />
     <ClInclude Include="clsBankClient.h" />
     <ClInclude Include="clsBGBankSystem.h" />
     <ClInclude Include="clsClientListScreen.h" />
@@ -137,11 +139,16 @@
     <ClInclude Include="clsFindClientScreen.h" />
     <ClInclude Include="clsInputValidate.h" />
     <ClInclude Include="clsMainScreen.h" />
+    <ClInclude Include="clsManageUsersScreen.h" />
     <ClInclude Include="clsPerson.h" />
     <ClInclude Include="clsScreen.h" />
+    <ClInclude Include="clsTotalBalanceScreen.h" />
     <ClInclude Include="clsTransactionMenuScreen.h" />
     <ClInclude Include="clsUpdateClientScreen.h" />
+    <ClInclude Include="clsUser.h" />
+    <ClInclude Include="clsUserListScreen.h" />
     <ClInclude Include="clsUtil.h" />
+    <ClInclude Include="clsWithdrawScreen.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

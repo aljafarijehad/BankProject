@@ -3,7 +3,7 @@ Lamar#//#Karami#//#Lama@gmail.com9999#//#98988#//#A107#//#1234#//#945.000000
 Gandi#//#Omran#//#Ghandi@gmail.com#//#1234#//#A108#//#1234#//#7200.000000
 Hilal#//#Mazin#//#A@A.com#//#123443#//#A110#//#1234#//#9000.000000
 Majida#//#Yousef#//#Majida#//#1234#//#A111#//#1234#//#717.000000
-Jehad#//#Jafari#//#jehad@gmail.com#//#0796978922#//#A101#//#123#//#600.000000
+Jehad#//#Jafari#//#jehad@gmail.com#//#0796978922#//#A101#//#123#//#130.000000
 Omar#//#Amer#//#omar@gmail.com#//#079797#//#A113#//#1234#//#0.000000
 Nadia#//#Khalel#//#nadia@gmail.com#//#0454545#//#A112#//#123#//#0.000000
 Amer#//#Jehad#//#amer@gmail.com#//#545456#//#A114#//#1234#//#0.000000
@@ -15,4 +15,5 @@ Roky#//#Paplo#//#rocky@gmail.com#//#012112#//#A119#//#1234#//#2.300000
 Nada#//#Jafari#//#nada@gmail.com#//#04545#//#A120#//#1234#//#50.000000
 Noor#//#Jafari#//#noor@gmail.com#//#05454#//#A121#//#1234#//#200.000000
 Leen#//#Abukhalaf#//#leen@gmail.com#//#0454578#//#A123#//#1234#//#565.450012
-Jory#//#Jafari#//#jory@gmail.com#//#087084#//#A122#//#1234#//#54.549999
+Jory#//#Jafari#//#jory@gmail.com#//#087084#//#A122#//#1234#//#55.090000
+Marim#//#Sako#//#mariam@gmail.com#//#07897155#//#K101#//#1234#//#200.000000
