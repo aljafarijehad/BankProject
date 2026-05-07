@@ -3,6 +3,10 @@
 #include "clsBankClient.h"
 #include "clsUserListScreen.h"
 #include "clsAddNewUserScreen.h"
+#include "clsDeleteUserScreen.h"
+#include "clsUpdateUserScreen.h"
+#include "clsFindUserScreen.h"
+#include "Global.h"
 class clsManageUsersScreen : protected clsScreen
 {
 private :
@@ -15,7 +19,7 @@ private :
 	static void _ShowListUsersScreen()
 	{
 		 // cout << "List Users Screen will be here ... " << endl;
-		clsUserListScreen::ShowUserListScreen();
+			clsUserListScreen::ShowUserListScreen();
 	}
 	
 	static void _ShowAddNewUserScreen()
@@ -26,17 +30,20 @@ private :
 
 	static void _ShowDeleteUserScreen()
 	{
-		cout << "Delete User Screen will be here ... " << endl;
+		 //	cout << "Delete User Screen will be here ... " << endl;
+		clsDeleteUserScreen::ShowDeleteUserScreen();
 	}
 
 	static void _ShowUpdateUserScreen()
 	{
-		cout << "Update User Screen will be here ... " << endl;
+		//cout << "Update User Screen will be here ... " << endl;
+		clsUpdateUserScreen::ShowUpdateUserScreen();
 	}
 	
 	static void _ShowFindUserScreen()
 	{
-		cout << "Find User Screen will be here ... " << endl;
+		//cout << "Find User Screen will be here ... " << endl;
+		clsFindUserScreen::ShowFindUserScreen();
 	}
 
 	static void _GoBackToTransactionMenue ()
@@ -110,8 +117,14 @@ private :
 	}
 
 public :
+
 	static void ShowManageUsersMenue()
 	{
+		if (!CheckAccessRights(clsUser::enPermissions::pManageUsers))
+		{
+			return;
+		}
+
 		system("cls");
 		clsScreen::_DrawScreenHeader("\tManage Users Menue Screen ");
 
@@ -132,5 +145,7 @@ public :
 
 		_PerformManageUsersMenueOption(ManageUsersMenueOption);
 	}
+
+
 };
 

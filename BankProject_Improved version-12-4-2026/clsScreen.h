@@ -1,17 +1,23 @@
 #pragma once
 #include <iostream>
 #include <iomanip>
+#include "clsColor.h"
+#include "clsUser.h"
+#include "Global.h"
 using namespace std;
 class clsScreen
 {
     public  :
+
     enum enAlign {
         eLeft , eRight , eCenter
     };
+
     static void _DrawScreenHeader(string Title, string SubTitle = "")
     {
         cout << "\t\t\t\t\t______________________________________";
-        cout << "\n\n\t\t\t\t\t  " << Title;
+        cout << clsColor::GetColor(clsColor::enBlue)
+            <<"\n\n\t\t\t\t\t  " << Title << clsColor::GetColor(clsColor::enReset);
         if (SubTitle != "")
         {
             cout << "\n\t\t\t\t\t  " << SubTitle;
@@ -35,6 +41,21 @@ class clsScreen
         }
 
     }
+
+    static bool CheckAccessRights(clsUser::enPermissions RequiredPermissions)
+    {
+        if (!CurrentUser.CheckAccessPermission(RequiredPermissions))
+        {
+            cout << "\t\t\t\t\t______________________________________";
+            cout << clsColor::GetColor(clsColor::enRed) << "\n\n\t\t\t\t\t Access Denied! Contact your Admin." << clsColor::GetColor(clsColor::enReset);
+            cout << "\n\t\t\t\t\t______________________________________\n\n";
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+	}
 
 };
 

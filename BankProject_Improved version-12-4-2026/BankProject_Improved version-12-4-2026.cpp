@@ -1,9 +1,5 @@
-#include <iostream>
-#include "clsBankClient.h"
-#include "clsMainScreen.h"
-//#include <iomanip>
-using namespace std;
 
+#include"clsLogInScreen.h"
 int main() {
 
 
@@ -21,8 +17,12 @@ int main() {
 
 	//clsBGBankSystem::BGBankSystem();
 
-	clsMainScreen:: ShowMainMenuScreen();
+	 //clsMainScreen:: ShowMainMenuScreen();
+	while (true)
+	{
+		clsLogInScreen::ShowLogInScreen();
 
+	}
 
 	// Client1.Print();
 

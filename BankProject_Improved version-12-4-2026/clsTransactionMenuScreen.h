@@ -85,6 +85,11 @@ class clsTransactionMenuScreen : protected clsScreen
 
 		static void ShowTransactionMainMenueScreen() 
 		{
+			if (!CheckAccessRights(clsUser::enPermissions::pTransactionMenu))
+			{
+				return;
+			}
+
 			system("cls");
 			clsScreen::_DrawScreenHeader("\t Transaction Menue Screen ");
 		

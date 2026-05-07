@@ -1,15 +1,16 @@
 #pragma once
 #include <iostream>
-//#include "clsScreen.h"
+#include "clsScreen.h"
 #include "clsInputValidate.h"
 #include "clsClientListScreen.h"
 #include "clsAddNewClientScreen.h"
 #include "clsDeleteClientScreen.h"
 #include "clsUpdateClientScreen.h"
 #include "clsFindClientScreen.h"
-#include"clsBGBankSystem.h"
 #include "clsTransactionMenuScreen.h"
 #include "clsManageUsersScreen.h"
+#include "Global.h"
+#include"clsColor.h"
 using namespace std;
 class clsMainScreen : protected clsScreen
 {
@@ -64,10 +65,19 @@ class clsMainScreen : protected clsScreen
 			clsManageUsersScreen::ShowManageUsersMenue();
 		}
 
+		static void _LogOut()
+		{
+			//cout << "Log Out , will be here " << endl;
+			CurrentUser = clsUser::Find("", "");
+		}
+
 		static int _ReadMenuOption()
 		{
 			cout << setw(37) << left << "" << "Choose what do you want to do [1 to 8]? ";
-			int Choice = clsInputValidate::ReadIntNumberBetween(1, 8, "Enter Number between 1 to 8? ");
+
+			int Choice = clsInputValidate::ReadIntNumberBetween
+			(1, 8, "Enter Number between 1 to 8? ");
+
 			return Choice;
 		}
 
@@ -87,48 +97,63 @@ class clsMainScreen : protected clsScreen
 					system("cls");
 					_ShowListClientsScreen();
 					_GoBackToMainMenu();
+					break;
+
 				}
 				case enMainMenuOptions::eAddNewClient:
 				{
 					system("cls");
 					_ShowAddNewClientScreen();
 					_GoBackToMainMenu();
+					break;
+
 				}
 				case enMainMenuOptions::eDeleteClient:
 				{
 					system("cls");
 					_ShowDeleteClientScreen();
 					_GoBackToMainMenu();
+					break;
+
 				}
 				case enMainMenuOptions::eFindClient:
 				{
 					system("cls");
 					_ShowFindClientScreen();
 					_GoBackToMainMenu();
+					break;
+
 				}
 				case enMainMenuOptions::eUpdateClient:
 				{
 					system("cls");
 					_UpdateNewClientScreen();
 					_GoBackToMainMenu();
+					break;
+
 				}
 				case enMainMenuOptions::eTransactionMenu:
 				{
 					system("cls");
 					_ShowTransactionMenuScreen();
 					_GoBackToMainMenu();
+					break;
+
 				}
 				case enMainMenuOptions::eManageUser:
 				{
 					system("cls");
 					_ShowManageUserMenuScreen();
 					_GoBackToMainMenu();
+					break;
+
 				}
 
 				case enMainMenuOptions::eLogOut:
 				{
 					system("cls");
-					//LogIn()l
+					_LogOut();
+					break;
 				}
 
 			} // end switch case 
@@ -152,9 +177,9 @@ class clsMainScreen : protected clsScreen
 			_FormatString("\t[3] Delete Client ", clsScreen::enAlign::eCenter);
 			_FormatString("\t[4] Find Client ", clsScreen::enAlign::eCenter);
 			_FormatString("\t[5] Update Client ", clsScreen::enAlign::eCenter);
-
 			_FormatString("\t[6] Transactions ", clsScreen::enAlign::eCenter);
 			_FormatString("\t[7] Manage User", clsScreen::enAlign::eCenter);
+			_FormatString("\t[8] Log Out", clsScreen::enAlign::eCenter);
 			_FormatString("===========================================", clsScreen::enAlign::eCenter);
 
 			_PerfromMainMenuOption(enMainMenuOptions(_ReadMenuOption()));

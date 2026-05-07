@@ -2,16 +2,15 @@
 #include "clsScreen.h"
 #include "clsUser.h"
 #include "clsInputValidate.h"
-class clsAddNewUserScreen : protected clsScreen
+class clsUpdateUserScreen : protected clsScreen
 {
 
 	private :
-
-		static void _ReadUserInfo(clsUser &User)
+		static void _ReadUserInfo(clsUser& User)
 		{
 			cout << "\nFirst Name :";
 			User.FirstName = clsInputValidate::ReadString();
-		
+
 			cout << "\nLast Name :";
 			User.LastName = clsInputValidate::ReadString();
 
@@ -74,7 +73,7 @@ class clsAddNewUserScreen : protected clsScreen
 				cin >> Choice;
 				if (Choice == 'Y' || Choice == 'y')
 					Permissions |= clsUser::enPermissions::pUpdateClient;
-				
+
 				cout << "\nDo you want to give this user permission to find clients (Y/N) : ";
 				cin >> Choice;
 				if (Choice == 'Y' || Choice == 'y')
@@ -88,55 +87,67 @@ class clsAddNewUserScreen : protected clsScreen
 				cout << "\nDo you want to give this user permission to manage users (Y/N) : ";
 				cin >> Choice;
 				if (Choice == 'Y' || Choice == 'y')
-					Permissions |= clsUser::enPermissions::pManageUsers;	
+					Permissions |= clsUser::enPermissions::pManageUsers;
 			}
 
 			return Permissions;
 		}
 
 	public :
-
-		static void ShowAddNewUserScreen()
-		{
-			_DrawScreenHeader("\t   Add New User Screen ");
-			
+		static void ShowUpdateUserScreen() {
+		
+			clsScreen::_DrawScreenHeader("\t  Update User Screen ");
 			string Username = "";
-			cout << "Enter Username : ";
+			cout << "\nPlease Enter User Name :";
 			Username = clsInputValidate::ReadString();
 
-			while (clsUser::IsUserExist(Username))
+			while (!clsUser::IsUserExist(Username))
 			{
-				cout << "\nUsername Is Already Used , Choose another one :";
+				cout << "\nUsername Is Not Found , Choose another one :";
 				Username = clsInputValidate::ReadString();
 			}
-			
-			clsUser NewUser = clsUser::GetAddNewUserObject(Username);
 
-			_ReadUserInfo(NewUser);
+			clsUser UserToUpdate = clsUser::Find(Username);
+			_PrintUserRecord(UserToUpdate);
+			char answer = 'n';	
+			cout << "\nAre you sure that you want to update this user ?y/n? ";
+			cin >> answer;
 
-			clsUser::enSaveResults SaveResult = NewUser.Save();
-
-			switch (SaveResult)
+			if (tolower(answer) == 'y')
 			{
-				case clsUser::enSaveResults::svFaildEmptyObject:
-				{
-					cout << "\nFailed to add new user because the user object is empty " << endl;
-					break;
-				}
-				case clsUser::enSaveResults::svSucceeded:
-				{
-					cout << "\nUser added successfully " << endl;
-					_PrintUserRecord(NewUser);
-					break;
-				}
-				case clsUser::enSaveResults::svFaildAccountNumberNotExists:
-				{
-					cout << "\nFailed to add new user because the user name is already exist in the system " << endl;
-					break;
+				cout << "\nPlease enter new data for this user : \n";
+				_ReadUserInfo(UserToUpdate);
+				clsUser::enSaveResults SaveResult = UserToUpdate.Save();
+
+				switch (SaveResult)
+				{	
+					case clsUser::svFaildEmptyObject:
+					{
+						cout << "\nFailed to update user because the user data is empty !\n\n";
+						break;
+					}
+					case clsUser::svSucceeded:
+					{
+						cout << "\nAccount Updated Successfully :-) \n";
+						_PrintUserRecord(UserToUpdate);
+						break;
+					}
+					case clsUser::svFaildAccountNumberNotExists:
+					{
+						cout << "\nFailed to update user because the user does not exists !\n\n";
+						break;
+					}
 				}
 			}
+			else
+			{
+				cout << "\n\nThe Process Canceled ! " << endl;
+			}
+
+
 
 		}
+
 
 };
 

@@ -44,46 +44,50 @@ private :
 
 public :
 
-	static void ShowUpdateClientScreen ()
-	{
-
-		clsScreen::_DrawScreenHeader("\t  Update Client Screen ");
-		string AccountNumber = "";
-		cout << "\n Please Enter Account Number : ";
-		AccountNumber = clsInputValidate::ReadString();
-
-		while (!clsBankClient::IsClientExist(AccountNumber))
+		static void ShowUpdateClientScreen ()
 		{
-			cout << "Client with Account Numbre is not found , choose another one :";
+			if (!CheckAccessRights(clsUser::enPermissions::pUpdateClient))
+			{
+				return;
+			}
+
+			clsScreen::_DrawScreenHeader("\t  Update Client Screen ");
+			string AccountNumber = "";
+			cout << "\n Please Enter Account Number : ";
 			AccountNumber = clsInputValidate::ReadString();
-		}
 
-		clsBankClient client = clsBankClient::Find(AccountNumber);
-
-		_PrintClientRecord(client);
-		cout << "\n";
-		_FormatString("Update Client Info : \n", clsScreen::eCenter);
-		_ReadClientInfo(client);
-
-		 // need to refresh the file 
-		clsBankClient::enSaveResults SaveResult = client.Save();
-
-		switch (SaveResult)
-		{
-			case clsBankClient::enSaveResults::svSucceeded:
+			while (!clsBankClient::IsClientExist(AccountNumber))
 			{
-				cout << "\nAccount Updated Successfully :-) \n";
-				_PrintClientRecord(client);
-				break;
+				cout << "Client with Account Numbre is not found , choose another one :";
+				AccountNumber = clsInputValidate::ReadString();
 			}
-			case clsBankClient::enSaveResults::svFaildEmptyObject:
-			{
-				cout << "\nError account was not saved because it's Empty ";
-				break;
-			}
-		} // end switch
 
-	} // end function 
+			clsBankClient client = clsBankClient::Find(AccountNumber);
+
+			_PrintClientRecord(client);
+			cout << "\n";
+			_FormatString("Update Client Info : \n", clsScreen::eCenter);
+			_ReadClientInfo(client);
+
+			 // need to refresh the file 
+			clsBankClient::enSaveResults SaveResult = client.Save();
+
+			switch (SaveResult)
+			{
+				case clsBankClient::enSaveResults::svSucceeded:
+				{
+					cout << "\nAccount Updated Successfully :-) \n";
+					_PrintClientRecord(client);
+					break;
+				}
+				case clsBankClient::enSaveResults::svFaildEmptyObject:
+				{
+					cout << "\nError account was not saved because it's Empty ";
+					break;
+				}
+			} // end switch
+
+		} // end function 
 
 };
 
