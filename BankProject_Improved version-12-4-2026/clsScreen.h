@@ -24,7 +24,7 @@ protected :
         }
         cout << "\n\t\t\t\t\t______________________________________\n\n";
 
-        _ShowDateAndLoggedInUserInfo();
+        _ShowDateAndLoggedInUser();
         cout << "\t\t\t\t\t______________________________________\n\n";
 
     }
@@ -54,7 +54,7 @@ protected :
             cout << clsColor::GetColor(clsColor::enRed) << "\n\n\t\t\t\t\t Access Denied! Contact your Admin." << clsColor::GetColor(clsColor::enReset);
             cout << "\n\t\t\t\t\t______________________________________\n\n";
 
-            _ShowDateAndLoggedInUserInfo();
+            _ShowDateAndLoggedInUser();
             cout << "\t\t\t\t\t______________________________________\n\n";
             return false;
         }
@@ -63,7 +63,8 @@ protected :
             return true;
         }
 	}
-    static void _ShowDateAndLoggedInUserInfo()
+   
+    static void _ShowDateAndLoggedInUser()
     {
         cout << "\t\t\t\t\t" << "User: " << CurrentUser.UserName << endl;
         cout << "\t\t\t\t\t" << "Date: " << clsDate::DateToString(clsDate::GetSystemDate()) << endl;

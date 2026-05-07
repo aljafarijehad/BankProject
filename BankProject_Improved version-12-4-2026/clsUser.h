@@ -8,7 +8,6 @@
 const string FileName = "Users.txt";
 class clsUser : public clsPerson
 {
-
 private:
 	enum  enMode
 	{
@@ -34,8 +33,6 @@ private:
 			+ Seperator + User._UserName + Seperator + User._Password + Seperator +
 			to_string(User._Permissions);
 	}
-
-	
 
 	static void _SaveUserDataToFile(vector <clsUser>& vUsers)
 	{

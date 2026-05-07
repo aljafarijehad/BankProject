@@ -1,0 +1,55 @@
+[33mcommit ad157c0af99b673cc418657fc68ed3c5aa93f8f9[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmaster[m[33m)[m
+Author: aljafarijehad <aljafarijehad@gmail.com>
+Date:   Thu May 7 04:31:20 2026 +0300
+
+    Added log in screen and Apply Permissions
+
+[33mcommit 9f3634264f4204c0eb0de7ad39d64fb63595d071[m
+Author: aljafarijehad <aljafarijehad@gmail.com>
+Date:   Tue May 5 15:39:42 2026 +0300
+
+    Add user management system and refactor transaction screens
+    
+    Introduced user management (add/list users), refactored transaction menu to use new deposit, withdraw, and total balance screens. Removed UI code from client class, improved input validation, and updated project structure and data files for new features.
+
+[33mcommit 74644b7f88b89d007466ada9053b184b8b3aa521[m
+Author: aljafarijehad <aljafarijehad@gmail.com>
+Date:   Thu Apr 30 15:57:12 2026 +0300
+
+    Add Transaction Menue Screen
+
+[33mcommit e1a0313dcad535e682214dfdf79523aaa831f7cf[m
+Author: aljafarijehad <aljafarijehad@gmail.com>
+Date:   Mon Apr 27 21:50:05 2026 +0300
+
+    List Clients Screen is On
+
+[33mcommit 0390dcff6636254730489951761afb740640ac0b[m
+Author: aljafarijehad <aljafarijehad@gmail.com>
+Date:   Sun Apr 26 17:11:02 2026 +0300
+
+    Add ClientListScreen Class
+
+[33mcommit 154adbd645a2e0d16b8581362ac654871eae0636[m
+Author: aljafarijehad <aljafarijehad@gmail.com>
+Date:   Fri Apr 24 02:36:30 2026 +0300
+
+    Sorry my false no thing is edited
+
+[33mcommit befa0433d4f5c0ee59b51368326b3fbf38017f90[m
+Author: aljafarijehad <aljafarijehad@gmail.com>
+Date:   Fri Apr 24 02:34:10 2026 +0300
+
+    Add Menue Screen
+
+[33mcommit 0999c0cdb08645271a87e55ed5724b05d8b7edfa[m[33m ([m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: aljafarijehad <aljafarijehad@gmail.com>
+Date:   Sun Apr 12 13:20:21 2026 +0300
+
+    Add project files.
+
+[33mcommit f911d7e4eb835846cbe1fcb6a2bf95683b7a52df[m
+Author: aljafarijehad <aljafarijehad@gmail.com>
+Date:   Sun Apr 12 13:20:19 2026 +0300
+
+    Add .gitattributes and .gitignore.

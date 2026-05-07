@@ -18,10 +18,11 @@ int main() {
 	//clsBGBankSystem::BGBankSystem();
 
 	 //clsMainScreen:: ShowMainMenuScreen();
-	while (true)
-	{
-		clsLogInScreen::ShowLogInScreen();
+	
+	while (true){
 
+		if (!clsLogInScreen::ShowLogInScreen())
+			break;
 	}
 
 	// Client1.Print();

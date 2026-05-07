@@ -2,21 +2,20 @@
 #include "clsScreen.h"
 #include "clsMainScreen.h"
 #include "Global.h"
+#include "clsLoginLogger.h" // for logging login attempts
 class clsLogInScreen : protected clsScreen
 {
 private:
-	static void _LogIn()
+	static bool _LogIn()
 	{
 		bool LoginFaild = false;
 		string UserName = "", Password = "";
-
+		int counter = 0;
 		do
 		{
-			if (LoginFaild)
-				cout << setw(37) << left << clsColor::GetColor(clsColor::enRed)
-				<< "\tIncorrect User Name or Password , try again : "
-				<< clsColor::GetColor(clsColor::enReset) << endl;
+			counter++;
 
+		
 			cout << setw(37) << left << "" << "\tEnter User Name :";
 			cin >> UserName;
 
@@ -27,7 +26,20 @@ private:
 
 			LoginFaild = CurrentUser.IsEmpty();
 
-		} while (LoginFaild);
+			if (LoginFaild)
+				cout << setw(37) << left << clsColor::GetColor(clsColor::enRed)
+				<< "\tIncorrect User Name/Password , you have " << 3 - counter << " attempts left : "
+				<< clsColor::GetColor(clsColor::enReset) << endl;
+
+		} while (LoginFaild && (counter < 3));
+		
+		if (LoginFaild)
+		{
+			cout << clsColor::GetColor(clsColor::enRed)
+				<< "\nToo many failed login attempts. Exiting...\n"
+				<< clsColor::GetColor(clsColor::enReset);
+			return false;
+		}
 
 		cout << "\nWelcome "
 			<< clsColor::GetColor(clsColor::enGreen)
@@ -39,18 +51,21 @@ private:
 
 		system("cls");
 
+		clsLoginLogger::SaveLoginToLog(CurrentUser);
+
 		clsMainScreen::ShowMainMenuScreen();
 
 	}
 
 
+
 public:
 
-	static void ShowLogInScreen()
+	static bool ShowLogInScreen()
 	{
 		system("cls");
 		_DrawScreenHeader("\t  Log In Screen ");
-		_LogIn();
+		return _LogIn();
 	}
 };
 

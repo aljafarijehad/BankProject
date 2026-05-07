@@ -106,6 +106,16 @@ public:
 		return clsDate(Day, Month, Year);
 	}
 
+	static string GetSystemTime()
+	{
+		time_t t = time(0);
+		tm* now = localtime(&t);
+		short Hour, Minute, Second;
+		Hour = now->tm_hour;
+		Minute = now->tm_min;
+		Second = now->tm_sec;
+		return to_string(Hour) + ":" + to_string(Minute) + ":" + to_string(Second);
+	}
 
 	static	bool IsValidDate(clsDate Date)
 	{
