@@ -4,11 +4,11 @@
 #include "clsColor.h"
 #include "clsUser.h"
 #include "Global.h"
+#include  "clsDate.h"
 using namespace std;
-class clsScreen
+class clsScreen  
 {
-    public  :
-
+protected :
     enum enAlign {
         eLeft , eRight , eCenter
     };
@@ -23,6 +23,10 @@ class clsScreen
             cout << "\n\t\t\t\t\t  " << SubTitle;
         }
         cout << "\n\t\t\t\t\t______________________________________\n\n";
+
+        _ShowDateAndLoggedInUserInfo();
+        cout << "\t\t\t\t\t______________________________________\n\n";
+
     }
 
     static void _FormatString(string Text , enAlign Direction = enAlign::eCenter , short spaces = 0)
@@ -49,12 +53,20 @@ class clsScreen
             cout << "\t\t\t\t\t______________________________________";
             cout << clsColor::GetColor(clsColor::enRed) << "\n\n\t\t\t\t\t Access Denied! Contact your Admin." << clsColor::GetColor(clsColor::enReset);
             cout << "\n\t\t\t\t\t______________________________________\n\n";
+
+            _ShowDateAndLoggedInUserInfo();
+            cout << "\t\t\t\t\t______________________________________\n\n";
             return false;
         }
         else
         {
             return true;
         }
+	}
+    static void _ShowDateAndLoggedInUserInfo()
+    {
+        cout << "\t\t\t\t\t" << "User: " << CurrentUser.UserName << endl;
+        cout << "\t\t\t\t\t" << "Date: " << clsDate::DateToString(clsDate::GetSystemDate()) << endl;
 	}
 
 };
