@@ -88,13 +88,19 @@ class clsAddNewUserScreen : protected clsScreen
 				cout << "\nDo you want to give this user permission to manage users (Y/N) : ";
 				cin >> Choice;
 				if (Choice == 'Y' || Choice == 'y')
-					Permissions |= clsUser::enPermissions::pManageUsers;	
+					Permissions |= clsUser::enPermissions::pManageUsers;
+
+				cout << "\nDo you want to give this user permission to show login history (Y/N) : ";
+				cin >> Choice;
+				if (Choice == 'Y' || Choice == 'y')
+					Permissions |= clsUser::enPermissions::pShowLoginHistory;
 			}
 
 			return Permissions;
 		}
 
 	public :
+
 
 		static void ShowAddNewUserScreen()
 		{
@@ -137,6 +143,7 @@ class clsAddNewUserScreen : protected clsScreen
 			}
 
 		}
+
 
 };
 

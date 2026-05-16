@@ -5,6 +5,7 @@
 #include <vector>
 #include "C:/Users/User/source/repos/StringLibraryProject/StringLibraryProject/clsString.h"
 #include "clsPerson.h"
+#include "clsDate.h"
 const string FileName = "Users.txt";
 class clsUser : public clsPerson
 {
@@ -108,13 +109,89 @@ private:
 		_Update();
 	}
 
+	struct stLoginRecord
+	{
+
+	};
+	
+	static string _GetCurrentDateTime()
+	{
+		return  clsDate::DateToString(clsDate::GetSystemDate()) + " - " + clsDate::GetSystemTime();
+	}
+
+	static string _ConvertLoginRecordToString(clsUser User, string Delimiter = "#//#")
+	{
+		return _GetCurrentDateTime() + Delimiter + User.UserName + Delimiter + to_string(User.Permissions);
+
+	}
+
+	static void _SaveLoginDataToFile(clsUser User)
+	{
+		fstream file;
+		file.open("LoginLog.txt", ios::out | ios::app); // append mode
+		if (file.is_open())
+		{
+			file << _ConvertLoginRecordToString(User) << endl;
+		}
+		file.close();
+	}
+
+	/*struct stLoginRecord
+	{
+
+		string DateTime;
+		string Username;
+		int Permissions;
+
+		string GetDateTime() { return DateTime; }
+		string GetUserName() { return Username; }
+		int GetPermissions() { return Permissions; }
+
+		stLoginRecord(string DateTime, string UserName, int Permissions)
+		{
+			this->DateTime = DateTime;
+			this->Username = UserName;
+			this->Permissions = Permissions;
+		}
+	};*/
+
+	//static stLoginRecord _ConvertStringToLoginRecord (string Line, string Delimiter = "#//#")
+	//{
+	//	vector <string> vLoginRecord;
+	//	
+	//	vLoginRecord = clsString::Split(Line, Delimiter);
+	//	 
+	//	return stLoginRecord(vLoginRecord[0], vLoginRecord[1], stoi(vLoginRecord[2]));
+	//}
+
+	static vector <string> _LoadLoginDataFromFile()
+	{
+		vector <string> vLoginLoger;
+
+		fstream MyFile;
+		MyFile.open("LoginLog.txt", ios::in); // read mode
+		if (MyFile.is_open())
+		{
+			string Line;
+			while (getline(MyFile, Line))
+			{
+				vLoginLoger.push_back(Line);
+			}
+			MyFile.close();
+		}
+		return vLoginLoger;
+	}
+
 public:
 
+	
 	enum  enPermissions
 	{
 		eAll = -1, pListClient = 1, pAddNewClient = 2, pDeleteClient = 4,
-		pUpdateClient = 8, pFindClient = 16, pTransactionMenu = 32, pManageUsers = 64
+		pUpdateClient = 8, pFindClient = 16, pTransactionMenu = 32, pManageUsers = 64, pShowLoginHistory = 128
 	};
+
+	
 	clsUser(enMode Mode, string FirstName, string LastName, string Email, string Phone, string UserName, string Password, int Permissions) :
 		clsPerson(FirstName, LastName, Email, Phone)
 	{
@@ -260,6 +337,17 @@ public:
 			return true;
 		else 
 			return false;
+	}
+
+	void SaveLoginToLog()
+	{
+		_SaveLoginDataToFile(*this);
+	}
+
+
+	static vector <string> GetLoginLoggerList()
+	{
+		return _LoadLoginDataFromFile();
 	}
 
 };

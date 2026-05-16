@@ -9,6 +9,7 @@
 #include "clsFindClientScreen.h"
 #include "clsTransactionMenuScreen.h"
 #include "clsManageUsersScreen.h"
+#include "clsLoginLogerScreen.h"
 #include "Global.h"
 #include"clsColor.h"
 using namespace std;
@@ -19,7 +20,7 @@ class clsMainScreen : protected clsScreen
 		enum enMainMenuOptions {
 
 			eListClients = 1, eAddNewClient = 2, eDeleteClient = 3, eFindClient = 4,
-			eUpdateClient = 5, eTransactionMenu = 6, eManageUser = 7, eLogOut = 8
+			eUpdateClient = 5, eTransactionMenu = 6, eManageUser = 7, eLogOut = 9, eShowLoginHistory = 8
 		};
 
 		static void _ShowListClientsScreen ()
@@ -65,6 +66,11 @@ class clsMainScreen : protected clsScreen
 			clsManageUsersScreen::ShowManageUsersMenue();
 		}
 
+		static void _ShowLoginHistoryScreen()
+		{
+			//cout << "Login History Screen , will be here " << endl;
+			clsLoginLogerScreen::ShowLoginLogerScreen();
+		}
 		static void _LogOut()
 		{
 			//cout << "Log Out , will be here " << endl;
@@ -73,10 +79,10 @@ class clsMainScreen : protected clsScreen
 
 		static int _ReadMenuOption()
 		{
-			cout << setw(37) << left << "" << "Choose what do you want to do [1 to 8]? ";
+			cout << setw(37) << left << "" << "Choose what do you want to do [1 to 9]? ";
 
 			int Choice = clsInputValidate::ReadIntNumberBetween
-			(1, 8, "Enter Number between 1 to 8? ");
+			(1, 9, "Enter Number between 1 to 9? ");
 
 			return Choice;
 		}
@@ -148,7 +154,13 @@ class clsMainScreen : protected clsScreen
 					break;
 
 				}
-
+				case enMainMenuOptions::eShowLoginHistory:
+				{
+					system("cls");
+					_ShowLoginHistoryScreen();
+					_GoBackToMainMenu();
+					break;
+				}
 				case enMainMenuOptions::eLogOut:
 				{
 					system("cls");
@@ -179,7 +191,8 @@ class clsMainScreen : protected clsScreen
 			_FormatString("\t[5] Update Client ", clsScreen::enAlign::eCenter);
 			_FormatString("\t[6] Transactions ", clsScreen::enAlign::eCenter);
 			_FormatString("\t[7] Manage User", clsScreen::enAlign::eCenter);
-			_FormatString("\t[8] Log Out", clsScreen::enAlign::eCenter);
+			_FormatString("\t[8] Show Login History ", clsScreen::enAlign::eCenter);
+			_FormatString("\t[9] Log Out", clsScreen::enAlign::eCenter);
 			_FormatString("===========================================", clsScreen::enAlign::eCenter);
 
 			_PerfromMainMenuOption(enMainMenuOptions(_ReadMenuOption()));

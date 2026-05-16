@@ -12,7 +12,7 @@ class clsTransactionMenuScreen : protected clsScreen
 
 	private :
 
-		enum enTransactionMenueOption {
+		enum enManageUserMenueOption {
 			enDeposit = 1 , enWithdraw = 2 , enTotalBalance = 3 , enBackToMainMenue = 4
 		};
 
@@ -49,32 +49,32 @@ class clsTransactionMenuScreen : protected clsScreen
 			ShowTransactionMainMenueScreen();
 		}
 
-		static void _PerfromTransactionMenue(enTransactionMenueOption Option)
+		static void _PerfromTransactionMenue(enManageUserMenueOption Option)
 		{
 			switch (Option)
 			{
-				case enTransactionMenueOption::enDeposit:
+				case enManageUserMenueOption::enDeposit:
 				{
 					system("cls");
 					_ShowDepositScreen();
 					_GoBackToTransactionMenueScreen();
 					break;
 				}
-				case enTransactionMenueOption::enWithdraw:
+				case enManageUserMenueOption::enWithdraw:
 				{
 					system("cls");
 					_ShowWithdrawScreen();
 					_GoBackToTransactionMenueScreen();
 					break;
 				}
-				case enTransactionMenueOption::enTotalBalance:
+				case enManageUserMenueOption::enTotalBalance:
 				{
 					system("cls");
 					_ShowTotalBalanceScreen();
 					_GoBackToTransactionMenueScreen();
 					break;
 				}
-				case enTransactionMenueOption::enBackToMainMenue:
+				case enManageUserMenueOption::enBackToMainMenue:
 				{
 					break;
 				}
@@ -104,7 +104,7 @@ class clsTransactionMenuScreen : protected clsScreen
 			_FormatString("\t[4] Back To Main Meneu ", clsScreen::enAlign::eCenter);
 			_FormatString("===========================================", clsScreen::enAlign::eCenter);
 
-			_PerfromTransactionMenue(enTransactionMenueOption(ReadTransactionMenuOption()));
+			_PerfromTransactionMenue(enManageUserMenueOption(ReadTransactionMenuOption()));
 		}
 
 	};

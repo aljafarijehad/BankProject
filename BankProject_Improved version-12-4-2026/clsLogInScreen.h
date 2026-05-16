@@ -1,8 +1,8 @@
 #pragma once
 #include "clsScreen.h"
 #include "clsMainScreen.h"
+#include "clsUser.h"
 #include "Global.h"
-#include "clsLoginLogger.h" // for logging login attempts
 class clsLogInScreen : protected clsScreen
 {
 private:
@@ -51,13 +51,12 @@ private:
 
 		system("cls");
 
-		clsLoginLogger::SaveLoginToLog(CurrentUser);
+		CurrentUser.SaveLoginToLog();
 
 		clsMainScreen::ShowMainMenuScreen();
 
 	}
-
-
+	 
 
 public:
 
@@ -67,5 +66,6 @@ public:
 		_DrawScreenHeader("\t  Log In Screen ");
 		return _LogIn();
 	}
+
 };
 

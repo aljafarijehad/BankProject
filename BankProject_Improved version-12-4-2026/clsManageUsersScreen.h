@@ -6,14 +6,16 @@
 #include "clsDeleteUserScreen.h"
 #include "clsUpdateUserScreen.h"
 #include "clsFindUserScreen.h"
-#include "Global.h"
+#include "clsLogInScreen.h"
+//#include "Global.h"
 class clsManageUsersScreen : protected clsScreen
 {
 private :
 
-	enum  enTransactionMenueOption 
+	enum  enManageUserMenueOption 
 	{
-		enListUsers = 1, enAddNewUser = 2, enUpdateUser = 3, enDeleteUser = 4, enFindUser = 5, enBackToMainMenue = 6
+		enListUsers = 1, enAddNewUser = 2, enUpdateUser = 3, enDeleteUser = 4, enFindUser = 5 ,
+		enBackToMainMenue = 6
 	};
 
 	static void _ShowListUsersScreen()
@@ -56,13 +58,13 @@ private :
 
 	static void _PerformManageUsersMenueOption(short ManageUsersMenueOption) 
 	{
-		if (ManageUsersMenueOption == enTransactionMenueOption::enBackToMainMenue)
+		if (ManageUsersMenueOption == enManageUserMenueOption::enBackToMainMenue)
 		{
 			return;
 		}
 		switch (ManageUsersMenueOption)
 		{
-			case enTransactionMenueOption::enListUsers :
+			case enManageUserMenueOption::enListUsers :
 			{
 				system("cls");
 				_ShowListUsersScreen();
@@ -70,7 +72,7 @@ private :
 				break;
 
 			}
-			case enTransactionMenueOption::enAddNewUser :
+			case enManageUserMenueOption::enAddNewUser :
 			{
 				system("cls");
 				_ShowAddNewUserScreen();
@@ -78,7 +80,7 @@ private :
 				break;
 
 			}
-			case enTransactionMenueOption::enDeleteUser :
+			case enManageUserMenueOption::enDeleteUser :
 			{
 				system("cls");
 				_ShowDeleteUserScreen();
@@ -86,7 +88,7 @@ private :
 				break;
 
 			}
-			case enTransactionMenueOption::enUpdateUser :
+			case enManageUserMenueOption::enUpdateUser :
 			{
 				system("cls");
 				_ShowUpdateUserScreen();
@@ -94,14 +96,14 @@ private :
 				break;
 
 			}
-			case enTransactionMenueOption::enFindUser :
+			case enManageUserMenueOption::enFindUser :
 			{
 				system("cls");
 				_ShowFindUserScreen();
 				_GoBackToTransactionMenue();
 				break;
 			}
-			case enTransactionMenueOption::enBackToMainMenue :
+			case enManageUserMenueOption::enBackToMainMenue :
 			{
 				break;
 			}
