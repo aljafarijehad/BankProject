@@ -148,6 +148,7 @@
     <ClInclude Include="clsScreen.h" />
     <ClInclude Include="clsTotalBalanceScreen.h" />
     <ClInclude Include="clsTransactionMenuScreen.h" />
+    <ClInclude Include="clsTransferScreen.h" />
     <ClInclude Include="clsUpdateClientScreen.h" />
     <ClInclude Include="clsUpdateUserScreen.h" />
     <ClInclude Include="clsUser.h" />

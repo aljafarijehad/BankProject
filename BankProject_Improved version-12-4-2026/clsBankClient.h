@@ -12,6 +12,7 @@
 
 using namespace std;
 const string ClientFile = "Clients.txt";
+const string TransferLogFile = "TransferLog.txt";
 class clsBankClient : public clsPerson
 {
 private:
@@ -142,6 +143,31 @@ private:
 
 		return true;
 	}
+
+	static string _GetCurrentDateTime()
+	{
+		return  clsDate::DateToString(clsDate::GetSystemDate()) + " - " + clsDate::GetSystemTime();
+	}
+
+	static string _ConvertTransferLogerToString
+	(clsBankClient SourceAccount, clsBankClient DestinationAccount, double Amount ,string Delimiter = "#//#")
+	{
+		return _GetCurrentDateTime() + SourceAccount.AccountNumber() + Delimiter + DestinationAccount.AccountNumber() + Delimiter + to_string(SourceAccount.AccountBalance) + Delimiter + to_string(DestinationAccount.AccountBalance) + Delimiter + to_string(Amount)
+			+ CurrentUser.UserName;
+	}
+
+	static void SaveTransferLogIntoFile
+	(clsBankClient SourceAccount, clsBankClient DestinationAccount, double Amount)
+	{
+		fstream file;
+		file.open("TransferLog.txt", ios::out | ios::app); // append mode
+		if (file.is_open())
+		{
+			file << _ConvertTransferLogerToString(SourceAccount,DestinationAccount,Amount) << endl;
+		}
+		file.close();
+	}
+	
 public:
 
 	clsBankClient (enMode Mode, string FirstName, string LastName, string Email, string Phone, string AccountNumber, string PinCode, float AccountBalance , bool MarkForDelete  = false) :
@@ -324,6 +350,29 @@ public:
 		_Update();
 	}
 
+	bool Transfer(clsBankClient &FromClient , double Amount) 
+	{
+		if (FromClient.AccountBalance >= Amount)
+		{
+			FromClient.Withdraw(Amount);
+			this->Deposit(Amount);
+
+			if (FromClient.Save() == enSaveResults::svSucceeded && this->Save() == enSaveResults::svSucceeded)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+
+		}
+		else
+		{
+			return false;
+		}
+	}
+
 	static double GetTotalBalance()
 	{
 		vector <clsBankClient> vClients = GetClientsList();
@@ -335,4 +384,10 @@ public:
 		}
 		return TotalBalance;
 	}
+
+	void SaveTransferLog(clsBankClient FromClient ,double Amount )
+	{
+		_ConvertTransferLogerToString(FromClient , *this, Amount);
+	}
+
 };

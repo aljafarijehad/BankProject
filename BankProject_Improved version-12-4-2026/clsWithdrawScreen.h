@@ -7,7 +7,7 @@ class clsWithdrawScreen : clsScreen
 {
 
 	private :
-
+		
 		static void _PrintClientRecord(clsBankClient C)
 		{
 			cout << "\nThe following Client Card Info : ";
@@ -36,45 +36,46 @@ class clsWithdrawScreen : clsScreen
 			return AccountNumber;
 		}
 
-public :
-	static void ShowWithdrawScreen()
-	{
-		clsScreen::_DrawScreenHeader("\t  Withdraw Screen ");
-		string AccountNumber = "";
-		cout << "\nPlease Enter Account Number : ";
-		AccountNumber = clsInputValidate::ReadString();
+	public :
 
-		clsBankClient Client = clsBankClient::Find(AccountNumber);
+			static void ShowWithdrawScreen()
+			{
+				clsScreen::_DrawScreenHeader("\t  Withdraw Screen ");
+				string AccountNumber = "";
+				cout << "\nPlease Enter Account Number : ";
+				AccountNumber = clsInputValidate::ReadString();
 
-		_PrintClientRecord(Client);
+				clsBankClient Client = clsBankClient::Find(AccountNumber);
+
+				_PrintClientRecord(Client);
 		
-		cout << "\nEnter Amount To Withdraw : ";
+				cout << "\nEnter Amount To Withdraw : ";
 
-		double Amount = clsInputValidate::ReadDoubleNumber
-		("Invalid Amount, Enter again :", clsInputValidate::enNumbreType::PositiveNumber);
+				double Amount = clsInputValidate::ReadDoubleNumber
+				("Invalid Amount, Enter again :", clsInputValidate::enNumbreType::PositiveNumber);
 
 
-		cout << "\nAre you sure that you want to withdraw " << Amount << " from this account ?y/n? ";
-		char Answer = 'n';
-		cin >> Answer;
-		if (tolower(Answer) == 'y')
-		{
-			if (Client.Withdraw(Amount))
-			{
-				cout << "\nAmount Withdrawn Successfully :-)\n\n";
-				cout << "New Balance is : " << Client.AccountBalance << endl;
+				cout << "\nAre you sure that you want to withdraw " << Amount << " from this account ?y/n? ";
+				char Answer = 'n';
+				cin >> Answer;
+				if (tolower(Answer) == 'y')
+				{
+					if (Client.Withdraw(Amount))
+					{
+						cout << "\nAmount Withdrawn Successfully :-)\n\n";
+						cout << "New Balance is : " << Client.AccountBalance << endl;
+					}
+					else
+					{
+						cout << "\nInsufficient Balance!" << endl;
+					}
+				}
+				else
+				{
+					cout << "\nOperation Cancelled :-)\n\n";
+					return;
+				}
 			}
-			else
-			{
-				cout << "\nInsufficient Balance!" << endl;
-			}
-		}
-		else
-		{
-			cout << "\nOperation Cancelled :-)\n\n";
-			return;
-		}
-	}
 
 };	
 

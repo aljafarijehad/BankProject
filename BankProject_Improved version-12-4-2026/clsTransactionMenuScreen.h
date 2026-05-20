@@ -5,6 +5,7 @@
 #include "clsDepositScreen.h"
 #include "clsWithdrawScreen.h"
 #include "clsTotalBalanceScreen.h"
+#include "clsTransferScreen.h"
 using namespace std;
 
 class clsTransactionMenuScreen : protected clsScreen 
@@ -13,7 +14,7 @@ class clsTransactionMenuScreen : protected clsScreen
 	private :
 
 		enum enManageUserMenueOption {
-			enDeposit = 1 , enWithdraw = 2 , enTotalBalance = 3 , enBackToMainMenue = 4
+			enDeposit = 1 , enWithdraw = 2 , enTotalBalance = 3 , enTransfer = 4 , enBackToMainMenue = 5
 		};
 
 		static void _ShowDepositScreen()
@@ -33,11 +34,17 @@ class clsTransactionMenuScreen : protected clsScreen
 		//	cout << "Total Balance Screen will be here ..." << endl;
 			clsTotalBalanceScreen::ShowTotalBalanceScreen();
 		}
+
+		static void _ShowTransferScreen() 
+		{
+			//cout << "Transfer Screen will be here ..." << endl;
+			clsTransferScreen::ShowTransferScreen();
+		}
 		
 		static short ReadTransactionMenuOption () {
 	
-			cout << setw(37) << left << "" << "Choose what do you want to do? [1 to 4]? ";
-			short Choice = clsInputValidate::ReadIntNumberBetween(1, 4, "Enter Number between 1 to 4? ");
+			cout << setw(37) << left << "" << "Choose what do you want to do? [1 to 5]? ";
+			short Choice = clsInputValidate::ReadIntNumberBetween(1, 5, "Enter Number between 1 to 5? ");
 			return Choice;
 
 		}
@@ -74,6 +81,13 @@ class clsTransactionMenuScreen : protected clsScreen
 					_GoBackToTransactionMenueScreen();
 					break;
 				}
+				case enManageUserMenueOption::enTransfer :
+				{
+					system("cls");
+					_ShowTransferScreen();
+					_GoBackToTransactionMenueScreen();
+					break;
+				}
 				case enManageUserMenueOption::enBackToMainMenue:
 				{
 					break;
@@ -101,11 +115,12 @@ class clsTransactionMenuScreen : protected clsScreen
 			_FormatString("\t[1] Deposit Screen  ", clsScreen::enAlign::eCenter);
 			_FormatString("\t[2] Withdraw Screen ", clsScreen::enAlign::eCenter);
 			_FormatString("\t[3] Total Balance Screen ", clsScreen::enAlign::eCenter);
-			_FormatString("\t[4] Back To Main Meneu ", clsScreen::enAlign::eCenter);
-			_FormatString("===========================================", clsScreen::enAlign::eCenter);
+			_FormatString("\t[4] Transfer Screen ", clsScreen::enAlign::eCenter);
+			_FormatString("\t[5] Back To Main Menue", clsScreen::eCenter);
+			_FormatString("===========================================",clsScreen::enAlign::eCenter);
 
 			_PerfromTransactionMenue(enManageUserMenueOption(ReadTransactionMenuOption()));
 		}
 
-	};
+};
 

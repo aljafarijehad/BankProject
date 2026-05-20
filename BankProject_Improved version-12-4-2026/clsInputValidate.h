@@ -108,7 +108,9 @@ public:
 	static double ReadDoubleNumber(string ErrorMessage = "Invalid Number , Enter again :" , enNumbreType enType = All)
 	{
 		double number;
-		while (!(cin >> number) || (enType == PositiveNumber && number < 0) || (enType == NigativeNumber && number > 0))
+		while (!(cin >> number) || 
+			(enType == PositiveNumber && number < 0) || 
+			(enType == NigativeNumber  && number > 0) )
 		{
 			cin.clear();
 			cin.ignore(numeric_limits <streamsize>::max(), '\n');
@@ -117,16 +119,16 @@ public:
 		return (number);
 	}
 
-	static double ReadDoubleNumberBetween(double From, double To, string ErrorMessage = "Number is not withn the range :")
+	static double ReadDoubleNumberBetween(double From, double To, string ErrorMessage = "Number is not withn the range :" , enNumbreType enType = All)
 	{
-		double number = ReadIntNumber();
+		double number = ReadDoubleNumber("Invalid Number , Enter again :", enType);
 
-		while (IsNumberBetween(number, From, To))
+		while (!IsNumberBetween(number, From, To))
 		{
 			cout << ErrorMessage;
 			number = ReadIntNumber();
 		}
-
+		return number;
 	}
 
 	static bool IsValidDate(clsDate Date)

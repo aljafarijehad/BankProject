@@ -1,6 +1,5 @@
 #pragma once
-#include <iostream>
+#pragma warning(disable : 2005)
 #include "clsUser.h"
-
-clsUser CurrentUser = clsUser::Find("", "");
+extern clsUser CurrentUser = clsUser::Find("", "");
 
